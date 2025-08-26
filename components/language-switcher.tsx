@@ -1,14 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Globe } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export function LanguageSwitcher() {
-  const [language, setLanguage] = useState<"th" | "en">("th")
+  const { language, setLanguage } = useLanguage()
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "th" ? "en" : "th"))
+    setLanguage(language === "th" ? "en" : "th")
   }
 
   return (

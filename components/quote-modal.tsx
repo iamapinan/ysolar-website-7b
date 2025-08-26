@@ -10,10 +10,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Calculator, Loader2 } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export function QuoteModal() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { t } = useLanguage()
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,7 +43,7 @@ export function QuoteModal() {
       })
 
       if (response.ok) {
-        alert("ขอบคุณสำหรับการส่งคำขอใบเสนอราคา เราจะติดต่อกลับภายใน 24 ชั่วโมง")
+        alert(t("quote.successMessage"))
         setIsOpen(false)
         setFormData({
           name: "",
@@ -54,10 +57,10 @@ export function QuoteModal() {
           message: "",
         })
       } else {
-        alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง")
+        alert(t("quote.errorMessage"))
       }
     } catch (error) {
-      alert("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง")
+      alert(t("quote.errorMessage"))
     } finally {
       setIsSubmitting(false)
     }
@@ -72,17 +75,17 @@ export function QuoteModal() {
       <DialogTrigger asChild>
         <Button className="bg-primary hover:bg-primary/90 text-white">
           <Calculator className="mr-2 h-4 w-4" />
-          ขอใบเสนอราคา
+          {t("nav.getQuote")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">ขอใบเสนอราคา</DialogTitle>
+          <DialogTitle className="text-xl font-semibold">{t("quote.title")}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="name">ชื่อ-นามสกุล *</Label>
+              <Label htmlFor="name">{t("quote.name")} *</Label>
               <Input
                 id="name"
                 value={formData.name}
@@ -91,7 +94,7 @@ export function QuoteModal() {
               />
             </div>
             <div>
-              <Label htmlFor="email">อีเมล *</Label>
+              <Label htmlFor="email">{t("quote.email")} *</Label>
               <Input
                 id="email"
                 type="email"
@@ -104,7 +107,7 @@ export function QuoteModal() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="phone">เบอร์โทรศัพท์ *</Label>
+              <Label htmlFor="phone">{t("quote.phone")} *</Label>
               <Input
                 id="phone"
                 value={formData.phone}
@@ -113,7 +116,7 @@ export function QuoteModal() {
               />
             </div>
             <div>
-              <Label htmlFor="company">บริษัท/องค์กร</Label>
+              <Label htmlFor="company">{t("quote.company")}</Label>
               <Input
                 id="company"
                 value={formData.company}
@@ -123,71 +126,71 @@ export function QuoteModal() {
           </div>
 
           <div>
-            <Label htmlFor="serviceType">ประเภทบริการ *</Label>
+            <Label htmlFor="serviceType">{t("quote.serviceType")} *</Label>
             <Select value={formData.serviceType} onValueChange={(value) => handleInputChange("serviceType", value)}>
               <SelectTrigger>
-                <SelectValue placeholder="เลือกประเภทบริการ" />
+                <SelectValue placeholder={t("quote.selectPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="solar-rooftop">ระบบโซลาร์รูฟท็อป</SelectItem>
-                <SelectItem value="ev-charger">ระบบชาร์จรถยนต์ไฟฟ้า</SelectItem>
-                <SelectItem value="maintenance">บริการบำรุงรักษา</SelectItem>
-                <SelectItem value="consultation">ให้คำปรึกษา</SelectItem>
+                <SelectItem value="solar-rooftop">{t("quote.services.solarRooftop")}</SelectItem>
+                <SelectItem value="ev-charger">{t("quote.services.evCharger")}</SelectItem>
+                <SelectItem value="maintenance">{t("quote.services.maintenance")}</SelectItem>
+                <SelectItem value="consultation">{t("quote.services.consultation")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="projectSize">ขนาดโครงการ</Label>
+              <Label htmlFor="projectSize">{t("quote.projectSize")}</Label>
               <Select value={formData.projectSize} onValueChange={(value) => handleInputChange("projectSize", value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="เลือกขนาดโครงการ" />
+                  <SelectValue placeholder={t("quote.selectPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="small">เล็ก (1-10 kW)</SelectItem>
-                  <SelectItem value="medium">กลาง (10-100 kW)</SelectItem>
-                  <SelectItem value="large">ใหญ่ (100+ kW)</SelectItem>
+                  <SelectItem value="small">{t("quote.projectSizes.small")}</SelectItem>
+                  <SelectItem value="medium">{t("quote.projectSizes.medium")}</SelectItem>
+                  <SelectItem value="large">{t("quote.projectSizes.large")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <Label htmlFor="budget">งบประมาณ</Label>
+              <Label htmlFor="budget">{t("quote.budget")}</Label>
               <Select value={formData.budget} onValueChange={(value) => handleInputChange("budget", value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="เลือกช่วงงบประมาณ" />
+                  <SelectValue placeholder={t("quote.selectPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="under-500k">ต่ำกว่า 500,000 บาท</SelectItem>
-                  <SelectItem value="500k-1m">500,000 - 1,000,000 บาท</SelectItem>
-                  <SelectItem value="1m-5m">1,000,000 - 5,000,000 บาท</SelectItem>
-                  <SelectItem value="over-5m">มากกว่า 5,000,000 บาท</SelectItem>
+                  <SelectItem value="under-500k">{t("quote.budgets.under500k")}</SelectItem>
+                  <SelectItem value="500k-1m">{t("quote.budgets.500k1m")}</SelectItem>
+                  <SelectItem value="1m-5m">{t("quote.budgets.1m5m")}</SelectItem>
+                  <SelectItem value="over-5m">{t("quote.budgets.over5m")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           <div>
-            <Label htmlFor="timeline">ระยะเวลาที่ต้องการ</Label>
+            <Label htmlFor="timeline">{t("quote.timeline")}</Label>
             <Select value={formData.timeline} onValueChange={(value) => handleInputChange("timeline", value)}>
               <SelectTrigger>
-                <SelectValue placeholder="เลือกระยะเวลา" />
+                <SelectValue placeholder={t("quote.selectPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="urgent">ด่วน (ภายใน 1 เดือน)</SelectItem>
-                <SelectItem value="normal">ปกติ (1-3 เดือน)</SelectItem>
-                <SelectItem value="flexible">ยืดหยุ่น (3+ เดือน)</SelectItem>
+                <SelectItem value="urgent">{t("quote.timelines.urgent")}</SelectItem>
+                <SelectItem value="normal">{t("quote.timelines.normal")}</SelectItem>
+                <SelectItem value="flexible">{t("quote.timelines.flexible")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <Label htmlFor="message">รายละเอียดเพิ่มเติม</Label>
+            <Label htmlFor="message">{t("quote.message")}</Label>
             <Textarea
               id="message"
               value={formData.message}
               onChange={(e) => handleInputChange("message", e.target.value)}
-              placeholder="กรุณาระบุรายละเอียดโครงการ ความต้องการพิเศษ หรือคำถามอื่นๆ"
+              placeholder={t("quote.messagePlaceholder")}
               rows={4}
             />
           </div>
@@ -196,10 +199,10 @@ export function QuoteModal() {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                กำลังส่ง...
+                {t("quote.submitting")}
               </>
             ) : (
-              "ส่งคำขอใบเสนอราคา"
+              t("quote.submitButton")
             )}
           </Button>
         </form>

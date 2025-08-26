@@ -1,0 +1,137 @@
+export const translations = {
+  th: {
+    // Navigation
+    nav: {
+      home: "หน้าแรก",
+      about: "เกี่ยวกับเรา",
+      services: "บริการ",
+      projects: "ผลงาน",
+      news: "ข่าวสาร",
+      contact: "ติดต่อ",
+      getQuote: "ขอใบเสนอราคา",
+    },
+    // Common
+    common: {
+      readMore: "อ่านเพิ่มเติม",
+      contactUs: "ติดต่อเรา",
+      getStarted: "เริ่มต้น",
+      submit: "ส่ง",
+      cancel: "ยกเลิก",
+      loading: "กำลังโหลด...",
+      success: "สำเร็จ",
+      error: "เกิดข้อผิดพลาด",
+    },
+    // Quote Form
+    quote: {
+      title: "ขอใบเสนอราคา",
+      subtitle: "กรอกข้อมูลเพื่อรับใบเสนอราคาฟรี",
+      name: "ชื่อ-นามสกุล",
+      email: "อีเมล",
+      phone: "เบอร์โทรศัพท์",
+      company: "บริษัท/องค์กร",
+      serviceType: "ประเภทบริการ",
+      projectSize: "ขนาดโครงการ",
+      budget: "งบประมาณ",
+      timeline: "ระยะเวลาที่ต้องการ",
+      message: "รายละเอียดเพิ่มเติม",
+      messagePlaceholder: "กรุณาระบุรายละเอียดโครงการ ความต้องการพิเศษ หรือคำถามอื่นๆ",
+      submitButton: "ส่งคำขอใบเสนอราคา",
+      submitting: "กำลังส่ง...",
+      successMessage: "ขอบคุณสำหรับการส่งคำขอใบเสนอราคา เราจะติดต่อกลับภายใน 24 ชั่วโมง",
+      errorMessage: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
+      required: "จำเป็น",
+      selectPlaceholder: "เลือก...",
+      services: {
+        solarRooftop: "ระบบโซลาร์รูฟท็อป",
+        evCharger: "ระบบชาร์จรถยนต์ไฟฟ้า",
+        maintenance: "บริการบำรุงรักษา",
+        consultation: "ให้คำปรึกษา",
+      },
+      projectSizes: {
+        small: "เล็ก (1-10 kW)",
+        medium: "กลาง (10-100 kW)",
+        large: "ใหญ่ (100+ kW)",
+      },
+      budgets: {
+        under500k: "ต่ำกว่า 500,000 บาท",
+        "500k1m": "500,000 - 1,000,000 บาท",
+        "1m5m": "1,000,000 - 5,000,000 บาท",
+        over5m: "มากกว่า 5,000,000 บาท",
+      },
+      timelines: {
+        urgent: "ด่วน (ภายใน 1 เดือน)",
+        normal: "ปกติ (1-3 เดือน)",
+        flexible: "ยืดหยุ่น (3+ เดือน)",
+      },
+    },
+  },
+  en: {
+    // Navigation
+    nav: {
+      home: "Home",
+      about: "About Us",
+      services: "Services",
+      projects: "Projects",
+      news: "News",
+      contact: "Contact",
+      getQuote: "Get Quote",
+    },
+    // Common
+    common: {
+      readMore: "Read More",
+      contactUs: "Contact Us",
+      getStarted: "Get Started",
+      submit: "Submit",
+      cancel: "Cancel",
+      loading: "Loading...",
+      success: "Success",
+      error: "Error occurred",
+    },
+    // Quote Form
+    quote: {
+      title: "Get Quote",
+      subtitle: "Fill out the form to receive a free quote",
+      name: "Full Name",
+      email: "Email",
+      phone: "Phone Number",
+      company: "Company/Organization",
+      serviceType: "Service Type",
+      projectSize: "Project Size",
+      budget: "Budget",
+      timeline: "Timeline",
+      message: "Additional Details",
+      messagePlaceholder: "Please specify project details, special requirements, or other questions",
+      submitButton: "Submit Quote Request",
+      submitting: "Submitting...",
+      successMessage: "Thank you for your quote request. We will contact you within 24 hours",
+      errorMessage: "An error occurred. Please try again",
+      required: "Required",
+      selectPlaceholder: "Select...",
+      services: {
+        solarRooftop: "Solar Rooftop System",
+        evCharger: "EV Charging System",
+        maintenance: "Maintenance Service",
+        consultation: "Consultation",
+      },
+      projectSizes: {
+        small: "Small (1-10 kW)",
+        medium: "Medium (10-100 kW)",
+        large: "Large (100+ kW)",
+      },
+      budgets: {
+        under500k: "Under 500,000 THB",
+        "500k1m": "500,000 - 1,000,000 THB",
+        "1m5m": "1,000,000 - 5,000,000 THB",
+        over5m: "Over 5,000,000 THB",
+      },
+      timelines: {
+        urgent: "Urgent (Within 1 month)",
+        normal: "Normal (1-3 months)",
+        flexible: "Flexible (3+ months)",
+      },
+    },
+  },
+} as const
+
+export type Language = keyof typeof translations
+export type TranslationKey = keyof typeof translations.th

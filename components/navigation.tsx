@@ -4,17 +4,21 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Sun } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
+import { LanguageSwitcher } from "./language-switcher"
+import { QuoteModal } from "./quote-modal"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
 
   const navItems = [
-    { href: "/", label: "Home", labelTh: "หน้าแรก" },
-    { href: "/about", label: "About Us", labelTh: "เกี่ยวกับเรา" },
-    { href: "/services", label: "Services", labelTh: "บริการ" },
-    { href: "/projects", label: "Projects", labelTh: "ผลงาน" },
-    { href: "/news", label: "News", labelTh: "ข่าวสาร" },
-    { href: "/contact", label: "Contact", labelTh: "ติดต่อ" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/services", label: t("nav.services") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/news", label: t("nav.news") },
+    { href: "/contact", label: t("nav.contact") },
   ]
 
   return (
@@ -40,7 +44,8 @@ export function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Button className="bg-primary hover:bg-primary/90">Get Quote</Button>
+            <LanguageSwitcher />
+            <QuoteModal />
           </div>
 
           {/* Mobile menu button */}
@@ -65,8 +70,9 @@ export function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <div className="px-3 py-2">
-                <Button className="w-full bg-primary hover:bg-primary/90">Get Quote</Button>
+              <div className="px-3 py-2 flex items-center justify-between">
+                <LanguageSwitcher />
+                <QuoteModal />
               </div>
             </div>
           </div>
