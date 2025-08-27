@@ -7,14 +7,12 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 to-secondary/5 py-20 lg:py-32">
+      <section className="relative bg-background py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                Clean Energy
-                <span className="text-primary block">Solutions</span>
-                for Tomorrow
+              <h1 className="text-4xl lg:text-6xl font-bold text-primary leading-tight">
+                Clean Energy Solutions for Tomorrow
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Leading provider of solar rooftop systems and EV charging solutions. Transform your energy consumption
