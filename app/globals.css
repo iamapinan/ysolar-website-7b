@@ -124,3 +124,7 @@
     @apply bg-background text-foreground;
   }
 }
+.border-input { border: 1.5px solid #bcc4cf !important;margin: 4px 0 !important; }
+.border-input:hover { border-color: #87919f !important; }
+.border-input:focus-visible { border-color: var(--ring) !important; }
+.dark .border-input { border-color: #e1e6ed !important; }
