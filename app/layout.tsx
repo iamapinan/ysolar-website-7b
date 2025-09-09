@@ -12,6 +12,15 @@ export const metadata: Metadata = {
   description:
     "Leading provider of solar rooftop systems and EV charging solutions in Thailand | ผู้นำด้านระบบโซลาร์รูฟท็อปและโซลูชันการชาร์จรถยนต์ไฟฟ้าในประเทศไทย",
   generator: "v0.app",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 }
 
 export default function RootLayout({

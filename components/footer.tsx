@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Sun, Facebook, MessageCircle, Mail, Phone, MapPin } from "lucide-react"
+import Image from "next/image"
+import { Facebook, MessageCircle, Mail, Phone, MapPin } from "lucide-react"
 
 export function Footer() {
   return (
@@ -9,9 +10,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Sun className="w-5 h-5 text-primary-foreground" />
-              </div>
+              <Image src="/logo.svg" alt="Y Solar" width={32} height={32} className="rounded" />
               <span className="text-xl font-bold">Y Solar</span>
             </div>
             <p className="text-muted-foreground text-sm">

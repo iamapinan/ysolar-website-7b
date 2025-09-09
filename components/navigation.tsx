@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Sun } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { LanguageSwitcher } from "./language-switcher"
 import { QuoteModal } from "./quote-modal"
@@ -27,9 +28,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Sun className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <Image src="/logo.svg" alt="Y Solar" width={32} height={32} priority className="rounded" />
             <span className="text-xl font-bold text-foreground">Y Solar</span>
           </Link>
 
