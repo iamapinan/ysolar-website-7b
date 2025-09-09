@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sun, Zap, Wrench, CheckCircle, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import WattCalculator from "@/components/watt-calculator"
 
 export default function HomePage() {
   return (
@@ -98,6 +99,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Watt Calculator Section */}
+      <WattCalculator />
 
       {/* Why Y Solar Section */}
       <section className="py-20 bg-muted/30">
