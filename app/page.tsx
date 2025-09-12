@@ -3,8 +3,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Sun, Zap, Wrench, CheckCircle, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import WattCalculator from "@/components/watt-calculator"
+import { getPublishedServices } from "@/services/content.service"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const servicesDb = await getPublishedServices().catch(() => [])
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -49,53 +51,28 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Solar Service */}
-            <Card className="group hover:shadow-lg transition-shadow">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                  <Sun className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold">Solar Rooftop Solutions</h3>
-                <p className="text-muted-foreground">
-                  Complete solar rooftop design and installation services with international standard equipment
-                </p>
-                <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
-                  Learn More <ArrowRight className="ml-1 w-4 h-4" />
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* EV Charger Service */}
-            <Card className="group hover:shadow-lg transition-shadow">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-secondary/20 transition-colors">
-                  <Zap className="w-8 h-8 text-secondary" />
-                </div>
-                <h3 className="text-xl font-semibold">EV Charger Systems</h3>
-                <p className="text-muted-foreground">
-                  EV charger installation and electrical system upgrades for all vehicle types
-                </p>
-                <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
-                  Learn More <ArrowRight className="ml-1 w-4 h-4" />
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Maintenance Service */}
-            <Card className="group hover:shadow-lg transition-shadow">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                  <Wrench className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold">Maintenance & After Sales</h3>
-                <p className="text-muted-foreground">
-                  Regular maintenance and health checks for solar systems and EV chargers
-                </p>
-                <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
-                  Learn More <ArrowRight className="ml-1 w-4 h-4" />
-                </Link>
-              </CardContent>
-            </Card>
+            {(servicesDb as any[]).length > 0 ? (
+              (servicesDb as any[]).slice(0, 3).map((svc, i) => (
+                <Card key={svc.id} className="group hover:shadow-lg transition-shadow">
+                  <CardContent className="p-8 text-center space-y-4">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
+                      {[Sun, Zap, Wrench][i % 3]({ className: "w-8 h-8 text-primary" })}
+                    </div>
+                    <h3 className="text-xl font-semibold">{svc.title}</h3>
+                    {svc.summary && <p className="text-muted-foreground">{svc.summary}</p>}
+                    <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
+                      Learn More <ArrowRight className="ml-1 w-4 h-4" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <>
+                <Card className="group hover:shadow-lg transition-shadow"><CardContent className="p-8 text-center space-y-4"><div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors"><Sun className="w-8 h-8 text-primary" /></div><h3 className="text-xl font-semibold">Solar Rooftop Solutions</h3><p className="text-muted-foreground">Complete solar rooftop design and installation services with international standard equipment</p><Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">Learn More <ArrowRight className="ml-1 w-4 h-4" /></Link></CardContent></Card>
+                <Card className="group hover:shadow-lg transition-shadow"><CardContent className="p-8 text-center space-y-4"><div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-secondary/20 transition-colors"><Zap className="w-8 h-8 text-secondary" /></div><h3 className="text-xl font-semibold">EV Charger Systems</h3><p className="text-muted-foreground">EV charger installation and electrical system upgrades for all vehicle types</p><Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">Learn More <ArrowRight className="ml-1 w-4 h-4" /></Link></CardContent></Card>
+                <Card className="group hover:shadow-lg transition-shadow"><CardContent className="p-8 text-center space-y-4"><div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors"><Wrench className="w-8 h-8 text-primary" /></div><h3 className="text-xl font-semibold">Maintenance & After Sales</h3><p className="text-muted-foreground">Regular maintenance and health checks for solar systems and EV chargers</p><Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">Learn More <ArrowRight className="ml-1 w-4 h-4" /></Link></CardContent></Card>
+              </>
+            )}
           </div>
         </div>
       </section>

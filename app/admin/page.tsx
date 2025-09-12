@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { query } from "@/lib/db"
 import {
   LayoutDashboard,
   FileText,
@@ -13,14 +14,21 @@ import {
   Plus,
 } from "lucide-react"
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const [[svc]]: any = await query("SELECT COUNT(*) cnt FROM services")
+  const [[proj]]: any = await query("SELECT COUNT(*) cnt FROM projects")
+  const [[art]]: any = await query("SELECT COUNT(*) cnt FROM articles WHERE is_published = 1")
+  const [[tm]]: any = await query("SELECT COUNT(*) cnt FROM team_members")
+  const [[ct]]: any = await query("SELECT COUNT(*) cnt FROM contacts")
+  const [[qr]]: any = await query("SELECT COUNT(*) cnt FROM quote_requests")
+
   const stats = [
-    { title: "Total Services", value: "3", icon: LayoutDashboard, change: "+0%" },
-    { title: "Active Projects", value: "12", icon: Briefcase, change: "+8%" },
-    { title: "Published Articles", value: "24", icon: FileText, change: "+12%" },
-    { title: "Team Members", value: "8", icon: Users, change: "+0%" },
-    { title: "Contact Forms", value: "45", icon: MessageSquare, change: "+15%" },
-    { title: "Quote Requests", value: "18", icon: Calculator, change: "+22%" },
+    { title: "Total Services", value: String(svc?.cnt ?? 0), icon: LayoutDashboard, change: "+0%" },
+    { title: "Active Projects", value: String(proj?.cnt ?? 0), icon: Briefcase, change: "+0%" },
+    { title: "Published Articles", value: String(art?.cnt ?? 0), icon: FileText, change: "+0%" },
+    { title: "Team Members", value: String(tm?.cnt ?? 0), icon: Users, change: "+0%" },
+    { title: "Contact Forms", value: String(ct?.cnt ?? 0), icon: MessageSquare, change: "+0%" },
+    { title: "Quote Requests", value: String(qr?.cnt ?? 0), icon: Calculator, change: "+0%" },
   ]
 
   const recentActivity = [

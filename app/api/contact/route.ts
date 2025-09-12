@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { createContact } from "@/services/content.service"
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,22 +11,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // In a real application, you would save this to your database
-    // For now, we'll just log it and return success
-    console.log("Contact form submission:", {
+    await createContact({
       name,
       email,
       phone,
-      company,
+      subject: company || undefined,
       message,
-      type,
-      submittedAt: new Date().toISOString(),
+      meta: { type },
     })
-
-    // Here you would typically:
-    // 1. Save to database
-    // 2. Send email notification
-    // 3. Add to CRM system
 
     return NextResponse.json({ message: "Contact form submitted successfully" }, { status: 200 })
   } catch (error) {

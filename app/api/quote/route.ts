@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { createQuoteRequest } from "@/services/content.service"
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,25 +11,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // In a real application, you would save this to your database
-    console.log("Quote request submission:", {
+    await createQuoteRequest({
       name,
       email,
       phone,
-      company,
-      serviceType,
-      projectSize,
-      budget,
-      timeline,
-      message,
-      submittedAt: new Date().toISOString(),
+      service_type: serviceType,
+      details: message,
+      meta: { company, projectSize, budget, timeline },
     })
-
-    // Here you would typically:
-    // 1. Save to database
-    // 2. Send email notification to sales team
-    // 3. Create lead in CRM
-    // 4. Send confirmation email to customer
 
     return NextResponse.json({ message: "Quote request submitted successfully" }, { status: 200 })
   } catch (error) {
