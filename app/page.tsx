@@ -92,20 +92,23 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {(servicesDb as any[]).length > 0 ? (
-              (servicesDb as any[]).slice(0, 3).map((svc, i) => (
-                <Card key={svc.id} className="group hover:shadow-lg transition-shadow">
-                  <CardContent className="p-8 text-center space-y-4">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                      {[Sun, Zap, Wrench][i % 3]({ className: "w-8 h-8 text-primary" })}
-                    </div>
-                    <h3 className="text-xl font-semibold">{svc.title}</h3>
-                    {svc.summary && <p className="text-muted-foreground">{svc.summary}</p>}
-                    <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
-                      Learn More <ArrowRight className="ml-1 w-4 h-4" />
-                    </Link>
-                  </CardContent>
-                </Card>
-              ))
+              (servicesDb as any[]).slice(0, 3).map((svc, i) => {
+                const IconComponent = [Sun, Zap, Wrench][i % 3]
+                return (
+                  <Card key={svc.id} className="group hover:shadow-lg transition-shadow">
+                    <CardContent className="p-8 text-center space-y-4">
+                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
+                        <IconComponent className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold">{svc.title}</h3>
+                      {svc.summary && <p className="text-muted-foreground">{svc.summary}</p>}
+                      <Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">
+                        Learn More <ArrowRight className="ml-1 w-4 h-4" />
+                      </Link>
+                    </CardContent>
+                  </Card>
+                )
+              })
             ) : (
               <>
                 <Card className="group hover:shadow-lg transition-shadow"><CardContent className="p-8 text-center space-y-4"><div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors"><Sun className="w-8 h-8 text-primary" /></div><h3 className="text-xl font-semibold">Solar Rooftop Solutions</h3><p className="text-muted-foreground">Complete solar rooftop design and installation services with international standard equipment</p><Link href="/services" className="inline-flex items-center text-primary hover:text-primary/80">Learn More <ArrowRight className="ml-1 w-4 h-4" /></Link></CardContent></Card>
