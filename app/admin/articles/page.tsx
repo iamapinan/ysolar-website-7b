@@ -5,18 +5,18 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Plus, Search } from "lucide-react"
 import Link from "next/link"
-import { getAllServices } from "@/services/content.service"
+import { getAllArticles } from "@/services/content.service"
 import { RowActions } from "@/components/admin/row-actions"
 
-interface ServicesPageProps {
+interface ArticlesPageProps {
   searchParams: {
     page?: string
     search?: string
   }
 }
 
-async function ServicesList({ page = 1, search = "" }: { page: number; search: string }) {
-  const { data: services, total, page: currentPage, limit } = await getAllServices(page, 10, search)
+async function ArticlesList({ page = 1, search = "" }: { page: number; search: string }) {
+  const { data: articles, total, page: currentPage, limit } = await getAllArticles(page, 10, search)
   const totalPages = Math.ceil(total / limit)
 
   return (
@@ -27,7 +27,7 @@ async function ServicesList({ page = 1, search = "" }: { page: number; search: s
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
             <Input
-              placeholder="ค้นหาบริการ..."
+              placeholder="ค้นหาบทความ..."
               defaultValue={search}
               className="pl-10"
               name="search"
@@ -35,52 +35,52 @@ async function ServicesList({ page = 1, search = "" }: { page: number; search: s
           </div>
         </div>
         <Button asChild>
-          <Link href="/admin/services/new">
+          <Link href="/admin/articles/new">
             <Plus className="w-4 h-4 mr-2" />
-            เพิ่มบริการ
+            เพิ่มบทความ
           </Link>
         </Button>
       </div>
 
-      {/* Services Table */}
+      {/* Articles Table */}
       <Card>
         <CardHeader>
-          <CardTitle>รายการบริการ ({total} รายการ)</CardTitle>
+          <CardTitle>รายการบทความ ({total} รายการ)</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left p-2">ชื่อบริการ</th>
+                  <th className="text-left p-2">ชื่อบทความ</th>
                   <th className="text-left p-2">หมวดหมู่</th>
                   <th className="text-left p-2">สถานะ</th>
-                  <th className="text-left p-2">วันที่สร้าง</th>
+                  <th className="text-left p-2">เผยแพร่เมื่อ</th>
                   <th className="text-left p-2">การจัดการ</th>
                 </tr>
               </thead>
               <tbody>
-                {services.map((service: any) => (
-                  <tr key={service.id} className="border-b hover:bg-muted/50">
+                {articles.map((article: any) => (
+                  <tr key={article.id} className="border-b hover:bg-muted/50">
                     <td className="p-2">
                       <div>
-                        <div className="font-medium">{service.title}</div>
-                        <div className="text-sm text-muted-foreground">{service.slug}</div>
+                        <div className="font-medium">{article.title}</div>
+                        <div className="text-sm text-muted-foreground">{article.slug}</div>
                       </div>
                     </td>
                     <td className="p-2">
-                      <Badge variant="outline">{service.category}</Badge>
+                      <Badge variant="outline">{article.category}</Badge>
                     </td>
                     <td className="p-2">
-                      <Badge variant={service.is_published ? "default" : "secondary"}>
-                        {service.is_published ? "เผยแพร่" : "ร่าง"}
+                      <Badge variant={article.is_published ? "default" : "secondary"}>
+                        {article.is_published ? "เผยแพร่" : "ร่าง"}
                       </Badge>
                     </td>
                     <td className="p-2 text-sm text-muted-foreground">
-                      {new Date(service.created_at).toLocaleDateString('th-TH')}
+                      {article.published_at ? new Date(article.published_at).toLocaleDateString('th-TH') : '-'}
                     </td>
                     <td className="p-2">
-                      <RowActions kind="services" id={service.id} isPublished={!!service.is_published} />
+                      <RowActions kind="articles" id={article.id} isPublished={!!article.is_published} />
                     </td>
                   </tr>
                 ))}
@@ -108,20 +108,21 @@ async function ServicesList({ page = 1, search = "" }: { page: number; search: s
   )
 }
 
-export default function AdminServicesPage({ searchParams }: ServicesPageProps) {
+export default function AdminArticlesPage({ searchParams }: ArticlesPageProps) {
   const page = parseInt(searchParams.page || "1")
   const search = searchParams.search || ""
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">จัดการบริการ</h1>
-        <p className="text-muted-foreground">จัดการข้อมูลบริการของบริษัท</p>
+        <h1 className="text-3xl font-bold">จัดการบทความ</h1>
+        <p className="text-muted-foreground">จัดการข่าวและบทความความรู้ของบริษัท</p>
       </div>
 
       <Suspense fallback={<div>กำลังโหลด...</div>}>
-        <ServicesList page={page} search={search} />
+        <ArticlesList page={page} search={search} />
       </Suspense>
     </div>
   )
 }
+

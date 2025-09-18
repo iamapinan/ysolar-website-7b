@@ -16,10 +16,12 @@ import {
   Sun,
   ChevronLeft,
   ChevronRight,
+  Image,
 } from "lucide-react"
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { name: "Hero Banners", href: "/admin/hero-banners", icon: Image },
   { name: "Services", href: "/admin/services", icon: Sun },
   { name: "Projects", href: "/admin/projects", icon: Briefcase },
   { name: "Articles", href: "/admin/articles", icon: FileText },

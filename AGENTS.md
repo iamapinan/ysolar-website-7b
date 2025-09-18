@@ -195,3 +195,11 @@ ADMIN_EMAIL=admin@ysolar.com
 
 ### Contact Information
 For technical support or questions about this system, contact the development team or refer to the project documentation.
+
+### R2
+เชื่อมต่อและเก็บข้อมูลใน cloudflare r2
+API: @https://603cdeb5c9b9c8faedcdec45863bb3b1.r2.cloudflarestorage.com/ysolar-data 
+Public URL: @https://pub-4315e933e6e445138c2fb694e184c15a.r2.dev 
+R2 Token: mjCBe0Q7bwZbL6lJo06P9sODQrPjAVaVpzcA7XEl
+Access Key ID: 5682a17b2985c0d93486071efaefa330
+Secret Access Key: 813ad423d799ef35ec9dd729926848c3de9c3507f8df50375c30b58a8f407c70

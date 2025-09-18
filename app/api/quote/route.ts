@@ -11,11 +11,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
+    const normalizeServiceType = (v?: string): 'solar' | 'ev' | 'maintenance' | null => {
+      const s = (v || '').toLowerCase()
+      if (["solar","solar-rooftop","rooftop","solar_rooftop","solarroof"].includes(s)) return 'solar'
+      if (["ev","ev-charger","charger","ev_charger","evcharger"].includes(s)) return 'ev'
+      if (["maintenance","maintain","m&a","after-sale","after_sales"].includes(s)) return 'maintenance'
+      return null
+    }
+
     await createQuoteRequest({
       name,
       email,
       phone,
-      service_type: serviceType,
+      service_type: normalizeServiceType(serviceType) ?? null,
       details: message,
       meta: { company, projectSize, budget, timeline },
     })

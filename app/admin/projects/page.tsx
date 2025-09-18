@@ -3,9 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Plus, Search, Edit, Trash2, Eye, EyeOff } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import Link from "next/link"
 import { getAllProjects } from "@/services/content.service"
+import { RowActions } from "@/components/admin/row-actions"
 
 interface ProjectsPageProps {
   searchParams: {
@@ -79,19 +80,7 @@ async function ProjectsList({ page = 1, search = "" }: { page: number; search: s
                       </Badge>
                     </td>
                     <td className="p-2">
-                      <div className="flex gap-2">
-                        <Button size="sm" variant="outline" asChild>
-                          <Link href={`/admin/projects/${project.id}`}>
-                            <Edit className="w-4 h-4" />
-                          </Link>
-                        </Button>
-                        <Button size="sm" variant="outline">
-                          {project.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </Button>
-                        <Button size="sm" variant="outline" className="text-destructive">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
+                      <RowActions kind="projects" id={project.id} isPublished={!!project.is_published} />
                     </td>
                   </tr>
                 ))}

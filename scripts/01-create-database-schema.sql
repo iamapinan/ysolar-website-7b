@@ -123,6 +123,37 @@ CREATE TABLE IF NOT EXISTS users (
   UNIQUE KEY uq_users_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Site Settings
+CREATE TABLE IF NOT EXISTS site_settings (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  key_name VARCHAR(255) NOT NULL,
+  value TEXT,
+  description TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_site_settings_key (key_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Hero Banners
+CREATE TABLE IF NOT EXISTS hero_banners (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  subtitle VARCHAR(255),
+  description TEXT,
+  background_image VARCHAR(512),
+  button_text VARCHAR(100),
+  button_link VARCHAR(255),
+  button_text_2 VARCHAR(100),
+  button_link_2 VARCHAR(255),
+  is_active TINYINT(1) DEFAULT 1,
+  sort_order INT DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_hero_banners_active (is_active, sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Useful indexes
 -- Index statements above included in table definitions where appropriate
 

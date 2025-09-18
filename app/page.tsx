@@ -4,37 +4,77 @@ import { Sun, Zap, Wrench, CheckCircle, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import WattCalculator from "@/components/watt-calculator"
 import { getPublishedServices } from "@/services/content.service"
+import { db } from "@/lib/db"
 
 export default async function HomePage() {
   const servicesDb = await getPublishedServices().catch(() => [])
+  
+  // Get active hero banner
+  const [heroBanners] = await db.execute(
+    'SELECT * FROM hero_banners WHERE is_active = 1 ORDER BY sort_order ASC LIMIT 1'
+  ).catch(() => [[]])
+  const heroBanner = (heroBanners as any[])[0]
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 to-secondary/5 py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                Clean Energy
-                <span className="text-primary block">Solutions</span>
-                for Tomorrow
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Leading provider of solar rooftop systems and EV charging solutions. Transform your energy consumption
-                with our world-class technology and professional service.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
-                  Get Free Quote
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Projects
-                </Button>
-              </div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBanner?.background_image || "/modern-solar-panels-on-rooftop-with-blue-sky.png"} 
+            alt="Solar panels installation" 
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
+              {heroBanner?.title || "Clean Energy"}
+              <span className="text-yellow-400 block">{heroBanner?.subtitle || "Solutions for Tomorrow"}</span>
+            </h1>
+            <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
+              {heroBanner?.description || "Leading provider of solar rooftop systems and EV charging solutions. Transform your energy consumption with our world-class technology and professional service."}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              {heroBanner?.button_text && (
+                <Link href={heroBanner.button_link || "/quote"}>
+                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-4 text-lg">
+                    {heroBanner.button_text}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              )}
+              {heroBanner?.button_text_2 && (
+                <Link href={heroBanner.button_link_2 || "/projects"}>
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+                    {heroBanner.button_text_2}
+                  </Button>
+                </Link>
+              )}
+              {!heroBanner && (
+                <>
+                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-4 text-lg">
+                    Get Free Quote
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+                    View Projects
+                  </Button>
+                </>
+              )}
             </div>
-            <div className="relative">
-              <img src="/modern-solar-panels-on-rooftop-with-blue-sky.png" alt="Solar panels installation" className="rounded-lg shadow-2xl" />
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="animate-bounce">
+            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
             </div>
           </div>
         </div>

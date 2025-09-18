@@ -13,14 +13,14 @@ export function getDbPool() {
       DATABASE_URL,
     } = process.env as Record<string, string | undefined>
 
-    console.log("DB Config:", { 
-      hasUrl: !!DATABASE_URL, 
-      host: DB_HOST, 
-      port: DB_PORT, 
-      user: DB_USER, 
-      hasPassword: !!DB_PASSWORD, 
-      database: DB_NAME 
-    })
+    // console.log("DB Config:", { 
+    //   hasUrl: !!DATABASE_URL, 
+    //   host: DB_HOST, 
+    //   port: DB_PORT, 
+    //   user: DB_USER, 
+    //   hasPassword: !!DB_PASSWORD, 
+    //   database: DB_NAME 
+    // })
 
     if (DATABASE_URL) {
       pool = mysql.createPool({ uri: DATABASE_URL, connectionLimit: 10 })
@@ -42,6 +42,11 @@ export function getDbPool() {
 export async function query(sql: string, params?: any[]): Promise<[any, mysql.FieldPacket[]]> {
   const p = getDbPool()
   return p.query(sql, params)
+}
+
+// Export db for direct use
+export const db = {
+  execute: query
 }
 
 

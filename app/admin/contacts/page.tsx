@@ -7,11 +7,11 @@ import { Search, Mail, Phone, MessageSquare, Trash2 } from "lucide-react"
 import { getAllContacts, getAllQuoteRequests } from "@/services/content.service"
 
 interface ContactsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string
     search?: string
     tab?: string
-  }
+  }>
 }
 
 async function ContactsList({ page = 1, search = "" }: { page: number; search: string }) {
@@ -220,10 +220,11 @@ async function QuoteRequestsList({ page = 1, search = "" }: { page: number; sear
   )
 }
 
-export default function AdminContactsPage({ searchParams }: ContactsPageProps) {
-  const page = parseInt(searchParams.page || "1")
-  const search = searchParams.search || ""
-  const tab = searchParams.tab || "contacts"
+export default async function AdminContactsPage({ searchParams }: ContactsPageProps) {
+  const sp = await searchParams
+  const page = parseInt(sp.page || "1")
+  const search = sp.search || ""
+  const tab = sp.tab || "contacts"
 
   return (
     <div className="space-y-6">

@@ -34,4 +34,21 @@ VALUES
 ('admin@ysolar.com', '$2a$10$zvz9BMYhWR5kKhOjizrHGuQR3eJgvB9w8ZcTMkUjLr2zDXdcvWFuC', 'Administrator', 'admin')
 ;
 
+-- Site Settings
+INSERT IGNORE INTO site_settings (key_name, value, description)
+VALUES
+('site_title', 'Y Solar - Clean Energy Solutions', 'ชื่อเว็บไซต์'),
+('site_description', 'Leading provider of solar rooftop systems and EV charging solutions', 'คำอธิบายเว็บไซต์'),
+('contact_phone', '+66-2-xxx-xxxx', 'เบอร์โทรศัพท์ติดต่อ'),
+('contact_email', 'info@ysolar.co.th', 'อีเมลติดต่อ'),
+('hero_title', 'Clean Energy Solutions for Tomorrow', 'หัวข้อหลัก Hero Banner'),
+('hero_subtitle', 'Leading provider of solar rooftop systems and EV charging solutions', 'หัวข้อรอง Hero Banner')
+;
+
+-- Hero Banners
+INSERT IGNORE INTO hero_banners (title, subtitle, description, background_image, button_text, button_link, button_text_2, button_link_2, is_active, sort_order)
+VALUES
+('Clean Energy', 'Solutions for Tomorrow', 'Leading provider of solar rooftop systems and EV charging solutions. Transform your energy consumption with our world-class technology and professional service.', '/modern-solar-panels-on-rooftop-with-blue-sky.png', 'Get Free Quote', '/quote', 'View Projects', '/projects', TRUE, 1)
+;
+
 
