@@ -130,8 +130,25 @@ export const translations = {
         flexible: "Flexible (3+ months)",
       },
     },
+    // News Page
+    news: {
+      title: "News & Knowledge",
+      subtitle: "Stay updated with the latest in solar energy, EV charging, and sustainable technology",
+      searchPlaceholder: "Search articles...",
+      categories: "Categories",
+      stayUpdated: "Stay Updated",
+      newsletterText: "Subscribe to our newsletter for the latest updates on clean energy.",
+      emailPlaceholder: "Your email address",
+      subscribe: "Subscribe",
+      featuredArticles: "Featured Articles",
+      recentArticles: "Recent Articles",
+      loadMore: "Load More Articles",
+      readTime: "min read",
+      allArticles: "All Articles",
+      news: "News",
+      knowledge: "Knowledge",
+      tips: "Tips",
+      csr: "CSR",
+    },
   },
 } as const
-
-export type Language = keyof typeof translations
-export type TranslationKey = keyof typeof translations.th

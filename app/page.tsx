@@ -29,12 +29,52 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
         
+        {/* Realistic Sunlight Effects */}
+        <div className="absolute inset-0 z-5 pointer-events-none">
+          {/* Atmospheric Haze */}
+          <div className="absolute inset-0 atmospheric-haze"></div>
+          
+          {/* Sun Position (top right corner) */}
+          <div className="absolute top-16 right-16 w-32 h-32">
+            {/* Sun Core */}
+            <div className="absolute inset-0 sun-core sun-glow rounded-full"></div>
+            
+            {/* God Rays emanating from sun */}
+            <div className="absolute top-0 left-1/2 god-rays" style={{transformOrigin: 'center top'}}>
+              <div className="sun-ray h-96"></div>
+              <div className="sun-ray h-80"></div>
+              <div className="sun-ray h-[420px]"></div>
+              <div className="sun-ray h-96"></div>
+              <div className="sun-ray h-72"></div>
+              <div className="sun-ray h-96"></div>
+              <div className="sun-ray h-80"></div>
+            </div>
+          </div>
+          
+          {/* Lens Flares */}
+          <div className="absolute top-24 right-32 w-8 h-8 rounded-full bg-white/40 lens-flare" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-32 right-40 w-6 h-6 rounded-full bg-orange-200/50 lens-flare" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-40 right-48 w-4 h-4 rounded-full bg-orange-200/60 lens-flare" style={{animationDelay: '2s'}}></div>
+          
+          {/* Dust Particles in sunbeams */}
+          <div className="absolute top-32 right-24 w-1 h-1 bg-white/60 rounded-full dust-particles" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-48 right-32 w-1 h-1 bg-orange-100/70 rounded-full dust-particles" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-56 right-20 w-1 h-1 bg-white/50 rounded-full dust-particles" style={{animationDelay: '3s'}}></div>
+          <div className="absolute top-64 right-36 w-1 h-1 bg-orange-200/60 rounded-full dust-particles" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-40 right-16 w-1 h-1 bg-white/40 rounded-full dust-particles" style={{animationDelay: '2.5s'}}></div>
+          
+          {/* Subtle light rays across the scene */}
+          <div className="absolute top-20 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/10 to-transparent transform rotate-12 god-rays"></div>
+          <div className="absolute top-40 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-100/15 to-transparent transform rotate-6 god-rays" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-60 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/8 to-transparent transform rotate-3 god-rays" style={{animationDelay: '4s'}}></div>
+        </div>
+        
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
             <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
               {heroBanner?.title || "Clean Energy"}
-              <span className="text-yellow-400 block">{heroBanner?.subtitle || "Solutions for Tomorrow"}</span>
+              <span className="block" style={{color: '#fe7c49'}}>{heroBanner?.subtitle || "Solutions for Tomorrow"}</span>
             </h1>
             <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
               {heroBanner?.description || "Leading provider of solar rooftop systems and EV charging solutions. Transform your energy consumption with our world-class technology and professional service."}
@@ -42,7 +82,7 @@ export default async function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               {heroBanner?.button_text && (
                 <Link href={heroBanner.button_link || "/quote"}>
-                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-4 text-lg">
+                  <Button size="lg" className="text-white font-semibold px-8 py-4 text-lg hover:opacity-90" style={{backgroundColor: '#fe7c49'}}>
                     {heroBanner.button_text}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
@@ -57,11 +97,11 @@ export default async function HomePage() {
               )}
               {!heroBanner && (
                 <>
-                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-4 text-lg">
+                  <Button size="lg" className="text-white font-semibold px-8 py-4 text-lg hover:opacity-90" style={{backgroundColor: '#fe7c49'}}>
                     Get Free Quote
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+                  <Button size="lg" variant="outline" className="border-white text-gray-900 hover:bg-white hover:text-black px-8 py-4 text-lg">
                     View Projects
                   </Button>
                 </>
@@ -162,16 +202,15 @@ export default async function HomePage() {
             Get a free consultation and quote for your solar or EV charging project today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" variant="secondary" style={{backgroundColor: '#fe7c49'}}>
               Get Free Quote
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+            <a href="tel:0816526141"
+            
+              className="px-4 py-2 pointer-events-auto rounded-md border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
             >
               Call Us Now
-            </Button>
+            </a>
           </div>
         </div>
       </section>

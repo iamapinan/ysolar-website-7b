@@ -15,6 +15,75 @@ export async function getLatestArticles(limit = 6) {
   return rows as Array<{ id: number; slug: string; title: string; summary: string; category: string; published_at: string }>
 }
 
+export async function getPublishedArticles(category?: string, search?: string, limit = 20, offset = 0) {
+  let whereClause = "WHERE is_published = 1"
+  let params: any[] = []
+
+  if (category && category !== "all") {
+    whereClause += " AND category = ?"
+    params.push(category)
+  }
+
+  if (search) {
+    whereClause += " AND (title LIKE ? OR summary LIKE ? OR content LIKE ?)"
+    const searchTerm = `%${search}%`
+    params.push(searchTerm, searchTerm, searchTerm)
+  }
+
+  const [rows] = await query(
+    `SELECT id, slug, title, summary, category, published_at, created_at FROM articles ${whereClause} ORDER BY COALESCE(published_at, created_at) DESC LIMIT ? OFFSET ?`,
+    [...params, limit, offset]
+  )
+
+  return rows as Array<{
+    id: number
+    slug: string
+    title: string
+    summary: string
+    category: string
+    published_at: string
+    created_at: string
+  }>
+}
+
+export async function getPublishedArticlesCount(category?: string, search?: string) {
+  let whereClause = "WHERE is_published = 1"
+  let params: any[] = []
+
+  if (category && category !== "all") {
+    whereClause += " AND category = ?"
+    params.push(category)
+  }
+
+  if (search) {
+    whereClause += " AND (title LIKE ? OR summary LIKE ? OR content LIKE ?)"
+    const searchTerm = `%${search}%`
+    params.push(searchTerm, searchTerm, searchTerm)
+  }
+
+  const [[{ count }]]: any = await query(
+    `SELECT COUNT(*) as count FROM articles ${whereClause}`,
+    params
+  )
+
+  return count as number
+}
+
+export async function getArticleBySlug(slug: string) {
+  const [rows] = await query(
+    "SELECT * FROM articles WHERE slug = ? AND is_published = 1",
+    [slug]
+  )
+  return rows?.[0] || null
+}
+
+export async function getArticleCategoriesCount() {
+  const [rows] = await query(
+    "SELECT category, COUNT(*) as count FROM articles WHERE is_published = 1 GROUP BY category"
+  )
+  return rows as Array<{ category: string; count: number }>
+}
+
 export async function createContact(payload: {
   name: string
   email: string
@@ -161,6 +230,28 @@ export async function getAllProjects(page = 1, limit = 10, search = "") {
 export async function getProjectById(id: number) {
   const [rows] = await query("SELECT * FROM projects WHERE id = ?", [id])
   return rows?.[0] || null
+}
+
+export async function getProjectBySlug(slug: string) {
+  const [rows] = await query("SELECT * FROM projects WHERE slug = ? AND is_published = 1", [slug])
+  return rows?.[0] || null
+}
+
+export async function getPublishedProjects(limit = 10) {
+  const [rows] = await query(
+    "SELECT id, title, slug, client_name, location, capacity_kw, featured_image, created_at FROM projects WHERE is_published = 1 ORDER BY created_at DESC LIMIT ?",
+    [limit]
+  )
+  return rows as Array<{
+    id: number
+    title: string
+    slug: string
+    client_name: string
+    location: string
+    capacity_kw: number
+    featured_image: string
+    created_at: string
+  }>
 }
 
 export async function createProject(payload: {
@@ -495,6 +586,21 @@ export async function updateCompany(id: number, payload: { name?: string; legal_
   values.push(id)
   await query(`UPDATE companies SET ${fields.join(', ')} WHERE id = ?`, values)
   return true
+}
+
+// Site Settings
+export async function getSiteSettings() {
+  const [rows] = await query("SELECT key_name, value FROM site_settings")
+  const settings: Record<string, string> = {}
+  rows.forEach((row: any) => {
+    settings[row.key_name] = row.value
+  })
+  return settings
+}
+
+export async function getSiteSetting(key: string) {
+  const [rows] = await query("SELECT value FROM site_settings WHERE key_name = ?", [key])
+  return rows?.[0]?.value || null
 }
 
 

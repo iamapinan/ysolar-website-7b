@@ -17,7 +17,7 @@
   --secondary-foreground: #0b1b2b;
   --muted: #f6f7f9;
   --muted-foreground: oklch(0.45 0 0);
-  --accent: #FE7C49; /* secondary 2 (accent) */
+  --accent: #FE7C49; /* secondary 2 (accent) - now primary yellow replacement */
   --accent-foreground: #0b1b2b;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
@@ -76,8 +76,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-montserrat);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -123,6 +123,123 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Realistic Sunlight Effects */
+@keyframes god-rays {
+  0%, 100% {
+    opacity: 0.15;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: rotate(2deg) scale(1.02);
+  }
+}
+
+@keyframes sun-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+    filter: blur(0.5px);
+  }
+}
+
+@keyframes lens-flare {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.8);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(0px) scale(1);
+  }
+  80% {
+    opacity: 0.6;
+    transform: translateX(10px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30px) scale(0.9);
+  }
+}
+
+@keyframes dust-particles {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-15px) translateX(5px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0;
+  }
+}
+
+.god-rays {
+  animation: god-rays 8s ease-in-out infinite;
+}
+
+.sun-glow {
+  animation: sun-glow 6s ease-in-out infinite;
+}
+
+.lens-flare {
+  animation: lens-flare 4s ease-in-out infinite;
+}
+
+.dust-particles {
+  animation: dust-particles 5s ease-out infinite;
+}
+
+/* Realistic Sun Rays */
+.sun-ray {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(254, 124, 73, 0.2) 30%,
+    rgba(254, 124, 73, 0.1) 60%,
+    transparent 100%
+  );
+  transform-origin: top center;
+}
+
+.sun-ray:nth-child(1) { transform: rotate(-15deg); width: 2px; }
+.sun-ray:nth-child(2) { transform: rotate(-8deg); width: 1px; }
+.sun-ray:nth-child(3) { transform: rotate(-3deg); width: 3px; }
+.sun-ray:nth-child(4) { transform: rotate(0deg); width: 2px; }
+.sun-ray:nth-child(5) { transform: rotate(5deg); width: 1px; }
+.sun-ray:nth-child(6) { transform: rotate(12deg); width: 2px; }
+.sun-ray:nth-child(7) { transform: rotate(18deg); width: 1px; }
+
+/* Sun Core */
+.sun-core {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(254, 124, 73, 0.7) 20%,
+    rgba(254, 124, 73, 0.4) 50%,
+    rgba(254, 124, 73, 0.2) 80%,
+    transparent 100%
+  );
+}
+
+/* Atmospheric Haze */
+.atmospheric-haze {
+  background: radial-gradient(
+    ellipse 800px 400px at 70% 30%,
+    rgba(254, 124, 73, 0.1) 0%,
+    rgba(254, 124, 73, 0.05) 40%,
+    transparent 70%
+  );
 }
 .border-input { border: 1.5px solid #bcc4cf !important;margin: 4px 0 !important; }
 .border-input:hover { border-color: #87919f !important; }

@@ -228,7 +228,7 @@ export default function WattCalculator() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Zap className="w-6 h-6 text-yellow-500" />
+                      <Zap className="w-6 h-6 text-orange-500" />
                       แพ็คเกจแนะนำ
                     </CardTitle>
                   </CardHeader>
@@ -245,9 +245,9 @@ export default function WattCalculator() {
                       )}
                       
                       {result.recommendedWatt > 3000 && result.recommendedWatt <= 6000 && (
-                        <div className="p-4 border-2 border-yellow-500 rounded-lg bg-yellow-50">
+                        <div className="p-4 border-2 border-orange-500 rounded-lg bg-orange-50">
                           <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-semibold text-yellow-700">แพ็คเกจ Gold</h4>
+                            <h4 className="font-semibold text-orange-700">แพ็คเกจ Gold</h4>
                             <span className="text-sm text-muted-foreground">6,000 วัตต์</span>
                           </div>
                           <p className="text-sm text-muted-foreground">เหมาะสำหรับบ้านขนาดกลาง</p>
