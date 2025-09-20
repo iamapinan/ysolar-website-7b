@@ -1,0 +1,8 @@
+DATABASE_URL=mariadb://gracer:bDagkH767s22e422@103.117.148.249:3309/ysolar
+DB_HOST=103.117.148.249
+DB_PORT=3309
+DB_USER=gracer
+DB_PASSWORD=bDagkH767s22e422
+DB_NAME=ysolar
+NEXT_PUBLIC_SITE_URL=http://localhost
+ADMIN_EMAIL=admin@ysolar.co.th
