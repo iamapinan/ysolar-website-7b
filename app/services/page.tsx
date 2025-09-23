@@ -6,30 +6,16 @@ import {
   Zap, 
   Wrench, 
   CheckCircle, 
-  ArrowRight, 
-  Battery, 
-  Shield, 
-  Gauge,
-  Star,
-  Clock,
-  Users,
-  Award,
   TrendingUp,
-  Leaf,
-  Home,
-  Factory,
-  Car,
-  Smartphone,
   Settings,
-  HeadphonesIcon
 } from "lucide-react"
 import { getPublishedServices } from "@/services/content.service"
 
 export default async function ServicesPage() {
   const servicesDb = await getPublishedServices().catch(() => [])
   
-  // Enhanced service data with more comprehensive content
-  const serviceDetails = {
+  // Fallback service data for when database services are not available
+  const fallbackServiceDetails = {
     solar: {
       title: "โซลาร์รูฟท็อปและระบบจัดการพลังงาน",
       description: "บริการออกแบบและติดตั้งระบบโซลาร์รูฟท็อปครบวงจรด้วยอุปกรณ์มาตรฐานสากล พร้อมระบบจัดการพลังงานอัจฉริยะ เพื่อลดค่าไฟฟ้าได้ถึง 70%",
@@ -173,33 +159,29 @@ export default async function ServicesPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32">
           {servicesDb.length > 0 ? (
-            // เรียงลำดับใหม่: solar, maintenance, ev
-            ['solar', 'maintenance', 'ev'].map((serviceKey, index) => {
-              const serviceDetail = serviceDetails[serviceKey]
-              const IconComponent = serviceKey === 'solar' ? Sun : serviceKey === 'ev' ? Zap : Wrench
+            // แสดงข้อมูลจากฐานข้อมูล
+            servicesDb.map((service, index) => {
+              const IconComponent = service.category === 'solar' ? Sun : service.category === 'ev' ? Zap : Wrench
               
               return (
-                <div key={serviceKey} className="space-y-16">
+                <div key={service.id} className="space-y-16">
                   <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}>
                     {/* Content */}
                     <div className={`space-y-8 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                    <div>
-                      <h2 className="text-3xl lg:text-4xl font-bold text-foreground">{serviceDetail.title}</h2>
-                    </div>
+                      <div>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground">{service.title}</h2>
+                      </div>
 
                       <p className="text-lg text-muted-foreground leading-relaxed">
-                        {serviceDetail.description}
+                        {service.summary || "บริการพลังงานสะอาดคุณภาพสูง"}
                       </p>
 
-                      {/* Statistics */}
-                      <div className="grid grid-cols-2 gap-6">
-                        {serviceDetail.stats.map((stat, idx) => (
-                          <div key={idx} className="text-center p-4 bg-muted/50 rounded-lg">
-                            <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                            <div className="text-sm text-muted-foreground">{stat.label}</div>
-                          </div>
-                        ))}
-                      </div>
+                      {/* Content from database */}
+                      {service.content && (
+                        <div className="prose prose-sm max-w-none text-muted-foreground">
+                          <div dangerouslySetInnerHTML={{ __html: service.content }} />
+                        </div>
+                      )}
 
                       {/* CTA */}
                       <div className="flex flex-col sm:flex-row gap-4">
@@ -210,72 +192,19 @@ export default async function ServicesPage() {
                     {/* Image */}
                     <div className={`${index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
                       <div className="aspect-[4/3] bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl overflow-hidden">
-                        <img
-                          src={serviceDetail.image}
-                          alt={serviceDetail.title}
-                          className="w-full h-full object-cover"
-                        />
+                        {service.image_url ? (
+                          <img
+                            src={service.image_url}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <IconComponent className="w-24 h-24 text-primary/30" />
+                          </div>
+                        )}
                       </div>
                     </div>
-                  </div>
-
-                  {/* Detailed Features & Process */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Features */}
-                    <Card className="p-6">
-                      <CardContent className="p-0 space-y-4">
-                        <div className="flex items-center space-x-2">
-                          <Star className="w-6 h-6 text-primary" />
-                          <h3 className="text-xl font-semibold">คุณสมบัติเด่น</h3>
-                        </div>
-                        <div className="space-y-3">
-                          {serviceDetail.features.slice(0, 6).map((feature, idx) => (
-                            <div key={idx} className="flex items-start space-x-2">
-                              <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                              <span className="text-sm text-muted-foreground leading-relaxed">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Process */}
-                    <Card className="p-6">
-                      <CardContent className="p-0 space-y-4">
-                        <div className="flex items-center space-x-2">
-                          <Settings className="w-6 h-6 text-primary" />
-                          <h3 className="text-xl font-semibold">ขั้นตอนการทำงาน</h3>
-                        </div>
-                        <div className="space-y-3">
-                          {serviceDetail.process.slice(0, 6).map((step, idx) => (
-                            <div key={idx} className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-xs font-semibold text-primary">{idx + 1}</span>
-                              </div>
-                              <span className="text-sm text-muted-foreground leading-relaxed">{step}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Benefits */}
-                    <Card className="p-6">
-                      <CardContent className="p-0 space-y-4">
-                        <div className="flex items-center space-x-2">
-                          <TrendingUp className="w-6 h-6 text-primary" />
-                          <h3 className="text-xl font-semibold">ประโยชน์ที่ได้รับ</h3>
-                        </div>
-                        <div className="space-y-3">
-                          {serviceDetail.benefits.slice(0, 6).map((benefit, idx) => (
-                            <div key={idx} className="flex items-start space-x-2">
-                              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                              <span className="text-sm text-muted-foreground leading-relaxed">{benefit}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
                   </div>
                 </div>
               )
@@ -283,7 +212,7 @@ export default async function ServicesPage() {
           ) : (
             // Fallback if no database services found - เรียงลำดับใหม่: solar, maintenance, ev
             ['solar', 'maintenance', 'ev'].map((key, index) => {
-              const serviceDetail = serviceDetails[key]
+              const serviceDetail = fallbackServiceDetails[key]
               const IconComponent = key === 'solar' ? Sun : key === 'ev' ? Zap : Wrench
               return (
               <div key={key} className="space-y-16">

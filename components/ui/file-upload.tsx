@@ -117,6 +117,7 @@ export function FileUpload({
             คลิกเพื่อเลือกไฟล์หรือลากไฟล์มาวางที่นี่
           </p>
           <Button
+            type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
             variant="outline"
@@ -161,6 +162,7 @@ export function FileUpload({
                   ดู
                 </a>
                 <Button
+                  type="button"
                   size="sm"
                   variant="ghost"
                   onClick={() => handleDelete(file.key)}

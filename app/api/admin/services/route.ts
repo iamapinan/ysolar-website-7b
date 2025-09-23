@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
       content: body.content,
       category: body.category,
       is_published: !!body.is_published,
+      image_url: body.image_url,
     })
     return NextResponse.json({ id })
   } catch (e: any) {

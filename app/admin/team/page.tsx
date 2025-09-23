@@ -9,10 +9,10 @@ import { getAllTeamMembers } from "@/services/content.service"
 import { RowActions } from "@/components/admin/row-actions"
 
 interface TeamPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string
     search?: string
-  }
+  }>
 }
 
 async function TeamList({ page = 1, search = "" }: { page: number; search: string }) {
@@ -85,9 +85,10 @@ async function TeamList({ page = 1, search = "" }: { page: number; search: strin
   )
 }
 
-export default function AdminTeamPage({ searchParams }: TeamPageProps) {
-  const page = parseInt(searchParams.page || "1")
-  const search = searchParams.search || ""
+export default async function AdminTeamPage({ searchParams }: TeamPageProps) {
+  const params = await searchParams
+  const page = parseInt(params.page || "1")
+  const search = params.search || ""
   return (
     <div className="space-y-6">
       <div>

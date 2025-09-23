@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS services (
   title VARCHAR(255) NOT NULL,
   summary TEXT,
   content MEDIUMTEXT,
+  image_url VARCHAR(512),
   category ENUM('solar','ev','maintenance') NOT NULL,
   is_published TINYINT(1) DEFAULT 1,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

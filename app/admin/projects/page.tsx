@@ -9,10 +9,10 @@ import { getAllProjects } from "@/services/content.service"
 import { RowActions } from "@/components/admin/row-actions"
 
 interface ProjectsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string
     search?: string
-  }
+  }>
 }
 
 async function ProjectsList({ page = 1, search = "" }: { page: number; search: string }) {
@@ -108,9 +108,10 @@ async function ProjectsList({ page = 1, search = "" }: { page: number; search: s
   )
 }
 
-export default function AdminProjectsPage({ searchParams }: ProjectsPageProps) {
-  const page = parseInt(searchParams.page || "1")
-  const search = searchParams.search || ""
+export default async function AdminProjectsPage({ searchParams }: ProjectsPageProps) {
+  const params = await searchParams
+  const page = parseInt(params.page || "1")
+  const search = params.search || ""
 
   return (
     <div className="space-y-6">

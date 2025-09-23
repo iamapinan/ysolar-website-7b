@@ -2,9 +2,9 @@ import { query } from "@/lib/db"
 
 export async function getPublishedServices() {
   const [rows] = await query(
-    "SELECT id, slug, title, summary, category FROM services WHERE is_published = 1 ORDER BY id DESC"
+    "SELECT id, slug, title, summary, content, image_url, category FROM services WHERE is_published = 1 ORDER BY id DESC"
   )
-  return rows as Array<{ id: number; slug: string; title: string; summary: string; category: string }>
+  return rows as Array<{ id: number; slug: string; title: string; summary: string; content: string; image_url: string; category: string }>
 }
 
 export async function getLatestArticles(limit = 6) {
@@ -163,10 +163,11 @@ export async function createService(payload: {
   content?: string
   category: string
   is_published?: boolean
+  image_url?: string
 }) {
   const [result] = await query(
-    "INSERT INTO services (slug, title, summary, content, category, is_published) VALUES (?,?,?,?,?,?)",
-    [payload.slug, payload.title, payload.summary || null, payload.content || null, payload.category, payload.is_published ? 1 : 0]
+    "INSERT INTO services (slug, title, summary, content, category, is_published, image_url) VALUES (?,?,?,?,?,?,?)",
+    [payload.slug, payload.title, payload.summary || null, payload.content || null, payload.category, payload.is_published ? 1 : 0, payload.image_url || null]
   )
   // @ts-ignore
   return result.insertId as number
@@ -179,6 +180,7 @@ export async function updateService(id: number, payload: {
   content?: string
   category?: string
   is_published?: boolean
+  image_url?: string
 }) {
   const fields: string[] = []
   const values: any[] = []
