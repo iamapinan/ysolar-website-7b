@@ -4,6 +4,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { getCompany, updateCompany } from "@/services/content.service"
 
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic'
+
 export default async function AdminSettingsPage() {
   const company = await getCompany()
   async function save(formData: FormData) {

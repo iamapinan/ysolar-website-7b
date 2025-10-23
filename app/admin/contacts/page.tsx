@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Search, Mail, Phone, MessageSquare, Trash2 } from "lucide-react"
 import { getAllContacts, getAllQuoteRequests } from "@/services/content.service"
 
+export const dynamic = 'force-dynamic'
 interface ContactsPageProps {
   searchParams: Promise<{
     page?: string

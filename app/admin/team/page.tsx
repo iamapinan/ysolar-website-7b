@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Plus, Search } from "lucide-react"
 import Link from "next/link"
 import { getAllTeamMembers } from "@/services/content.service"
+export const dynamic = 'force-dynamic'
 import { RowActions } from "@/components/admin/row-actions"
 
 interface TeamPageProps {
