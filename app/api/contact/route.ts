@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createContact } from "@/services/content.service"
 
+export const runtime = 'nodejs'
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()

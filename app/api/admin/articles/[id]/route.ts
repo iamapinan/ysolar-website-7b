@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
+export const runtime = 'nodejs'
 import { COOKIE_NAME, getSession } from "@/lib/auth"
 import { deleteArticle, getArticleById, updateArticle } from "@/services/content.service"
 

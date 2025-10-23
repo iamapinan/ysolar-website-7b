@@ -5,6 +5,8 @@ import {
   getArticleCategoriesCount 
 } from "@/services/content.service"
 
+export const runtime = 'nodejs'
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)

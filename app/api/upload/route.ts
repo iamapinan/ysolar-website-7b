@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { R2Service } from '@/services/r2.service';
+export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
   try {

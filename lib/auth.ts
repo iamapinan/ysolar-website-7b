@@ -1,5 +1,5 @@
 import { query } from "@/lib/db"
-import bcrypt from "bcryptjs"
+import { createHash, timingSafeEqual } from "crypto"
 import { SignJWT, jwtVerify } from "jose"
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "dev_secret_change_me")
@@ -10,8 +10,12 @@ export async function verifyUser(email: string, password: string) {
   const [rows]: any = await query("SELECT id, email, password_hash, name, role FROM users WHERE email = ? LIMIT 1", [email])
   const user = rows?.[0]
   if (!user) return null
-  const ok = await bcrypt.compare(password, user.password_hash)
-  if (!ok) return null
+  
+  // For development, use simple hash comparison
+  // In production, you should use proper password hashing with salt
+  const hashedPassword = createHash('sha256').update(password + process.env.PASSWORD_SALT || 'dev_salt').digest('hex')
+  
+  if (hashedPassword !== user.password_hash) return null
   return { id: user.id, email: user.email, name: user.name, role: user.role }
 }
 

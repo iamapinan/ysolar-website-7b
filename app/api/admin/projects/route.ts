@@ -3,6 +3,8 @@ import { cookies } from "next/headers"
 import { COOKIE_NAME, getSession } from "@/lib/auth"
 import { createProject } from "@/services/content.service"
 
+export const runtime = 'nodejs'
+
 export async function POST(req: NextRequest) {
   const token = cookies().get(COOKIE_NAME)?.value
   const session = await getSession(token)

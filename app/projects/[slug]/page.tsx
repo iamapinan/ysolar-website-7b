@@ -59,18 +59,8 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
   }
 }
 
-// Generate static params for better performance
-export async function generateStaticParams() {
-  try {
-    const projects = await getPublishedProjects(50) // Get more projects for static generation
-    return projects.map((project) => ({
-      slug: project.slug,
-    }))
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
-}
+// Disable static generation for now to avoid build-time database issues
+export const dynamic = 'force-dynamic'
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { slug } = await params

@@ -14,6 +14,9 @@ import {
   Plus,
 } from "lucide-react"
 
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDashboard() {
   const [[svc]]: any = await query("SELECT COUNT(*) cnt FROM services")
   const [[proj]]: any = await query("SELECT COUNT(*) cnt FROM projects")

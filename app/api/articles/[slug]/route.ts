@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getArticleBySlug } from "@/services/content.service"
 
+export const runtime = 'nodejs'
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
