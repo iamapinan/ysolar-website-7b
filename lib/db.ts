@@ -46,7 +46,8 @@ export async function query(sql: string, params?: any[]): Promise<[any, mysql.Fi
 
 // Export db for direct use
 export const db = {
-  execute: query
+  execute: query,
+  query: query
 }
 
 

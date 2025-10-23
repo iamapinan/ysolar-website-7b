@@ -17,6 +17,7 @@ export function Navigation() {
     { href: "/", label: t("nav.home") },
     { href: "/about", label: t("nav.about") },
     { href: "/services", label: t("nav.services") },
+    { href: "/products", label: t("nav.products") },
     { href: "/projects", label: t("nav.projects") },
     { href: "/news", label: t("nav.news") },
     { href: "/contact", label: t("nav.contact") },

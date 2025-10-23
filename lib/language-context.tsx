@@ -20,12 +20,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (savedLanguage && (savedLanguage === "th" || savedLanguage === "en")) {
       setLanguage(savedLanguage)
     }
+    // Set initial html lang attribute
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = savedLanguage || "th"
+    }
   }, [])
 
   // Save language to localStorage when changed
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang)
     localStorage.setItem("language", lang)
+    // Update html lang attribute
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang
+    }
   }
 
   // Translation function

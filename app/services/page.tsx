@@ -8,6 +8,7 @@ import {
   CheckCircle, 
   TrendingUp,
   Settings,
+  Star,
 } from "lucide-react"
 import { getPublishedServices } from "@/services/content.service"
 
@@ -212,8 +213,7 @@ export default async function ServicesPage() {
           ) : (
             // Fallback if no database services found - เรียงลำดับใหม่: solar, maintenance, ev
             ['solar', 'maintenance', 'ev'].map((key, index) => {
-              const serviceDetail = fallbackServiceDetails[key]
-              const IconComponent = key === 'solar' ? Sun : key === 'ev' ? Zap : Wrench
+              const serviceDetail = fallbackServiceDetails[key as keyof typeof fallbackServiceDetails]
               return (
               <div key={key} className="space-y-16">
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}>

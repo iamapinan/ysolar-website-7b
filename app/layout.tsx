@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="th" suppressHydrationWarning>
       <body className={`${montserrat.variable} font-sans`}>
         <LanguageProvider>
           <Navigation />

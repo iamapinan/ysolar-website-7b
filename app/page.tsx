@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Sun, Zap, Wrench, CheckCircle, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import WattCalculator from "@/components/watt-calculator"
+import FeaturedProducts from "@/components/featured-products"
 import { getPublishedServices } from "@/services/content.service"
 import { db } from "@/lib/db"
 
@@ -120,8 +121,22 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Featured Products Section */}
       <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">Featured Products</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              High-quality solar products and equipment for your clean energy needs
+            </p>
+          </div>
+
+          <FeaturedProducts />
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground">Our Core Services</h2>

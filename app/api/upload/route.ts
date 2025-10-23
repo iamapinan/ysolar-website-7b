@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     let result;
     if (file.type.startsWith('image/')) {
-      result = await R2Service.uploadImage(buffer, filename, folder);
+      result = await R2Service.uploadImage(buffer, filename, folder, file.type);
     } else {
       result = await R2Service.uploadDocument(buffer, filename, folder);
     }

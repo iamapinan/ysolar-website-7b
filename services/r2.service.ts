@@ -65,12 +65,14 @@ export class R2Service {
   static async uploadImage(
     file: Buffer | Uint8Array | string,
     filename: string,
-    folder: string = 'images'
+    folder: string = 'images',
+    contentType: string = 'image/jpeg'
   ): Promise<UploadResult> {
     const timestamp = Date.now();
-    const key = `${folder}/${timestamp}-${filename}`;
+    const sanitizedFilename = filename.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const key = `${folder}/${timestamp}-${sanitizedFilename}`;
     
-    return this.uploadFile(file, key, 'image/jpeg');
+    return this.uploadFile(file, key, contentType);
   }
 
   /**
