@@ -102,7 +102,7 @@ export default async function HomePage() {
                     Get Free Quote
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                  <Button size="lg" variant="outline" className="border-white text-gray-900 hover:bg-white hover:text-black px-8 py-4 text-lg">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
                     View Projects
                   </Button>
                 </>
@@ -217,12 +217,16 @@ export default async function HomePage() {
             Get a free consultation and quote for your solar or EV charging project today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" style={{backgroundColor: '#fe7c49'}}>
+            <Button 
+              size="lg" 
+              className="text-white font-semibold hover:opacity-90 shadow-lg"
+              style={{backgroundColor: '#fe7c49'}}
+            >
               Get Free Quote
             </Button>
-            <a href="tel:0816526141"
-            
-              className="px-4 py-2 pointer-events-auto rounded-md border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+            <a 
+              href="tel:0816526141"
+              className="px-6 py-3 h-10 rounded-md border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent font-medium inline-flex items-center justify-center transition-colors"
             >
               Call Us Now
             </a>

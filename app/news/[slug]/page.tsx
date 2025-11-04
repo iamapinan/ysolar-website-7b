@@ -242,7 +242,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <h2 className="text-3xl lg:text-4xl font-bold">Ready to Go Solar?</h2>
           <p className="text-xl opacity-90">Contact our experts today for a free consultation and customized quote.</p>
-          <Button size="lg" variant="secondary">
+          <Button 
+            size="lg" 
+            className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg"
+          >
             Get Free Quote
           </Button>
         </div>

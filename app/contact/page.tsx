@@ -285,7 +285,10 @@ export default function ContactPage() {
             Schedule a free consultation with our experts and get a customized quote for your project.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary">
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg"
+            >
               Schedule Consultation
             </Button>
             <Button

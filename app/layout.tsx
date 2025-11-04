@@ -1,5 +1,5 @@
-import type React from "react"
 import type { Metadata } from "next"
+import type { ReactNode } from "react"
 import { Montserrat } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="th" suppressHydrationWarning>

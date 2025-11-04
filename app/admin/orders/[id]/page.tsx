@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/language-context';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -54,9 +54,10 @@ interface Order {
   items: OrderItem[];
 }
 
-export default function AdminOrderDetailPage({ params }: { params: { id: string } }) {
+export default function AdminOrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { language } = useLanguage();
   const router = useRouter();
+  const { id } = use(params);
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -74,7 +75,7 @@ export default function AdminOrderDetailPage({ params }: { params: { id: string 
     const fetchOrder = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/orders/${params.id}`);
+        const response = await fetch(`/api/orders/${id}`);
         if (response.ok) {
           const data = await response.json();
           setOrder(data);
@@ -96,14 +97,14 @@ export default function AdminOrderDetailPage({ params }: { params: { id: string 
     };
 
     fetchOrder();
-  }, [params.id]);
+  }, [id]);
 
   const handleUpdate = async () => {
     if (!order) return;
 
     setSaving(true);
     try {
-      const response = await fetch(`/api/orders/${params.id}`, {
+      const response = await fetch(`/api/orders/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

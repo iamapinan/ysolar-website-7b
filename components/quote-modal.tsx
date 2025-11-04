@@ -11,8 +11,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Calculator, Loader2 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { cn } from "@/lib/utils"
 
-export function QuoteModal() {
+interface QuoteModalProps {
+  className?: string
+  size?: "default" | "sm" | "lg" | "icon"
+}
+
+export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { t } = useLanguage()
@@ -73,7 +79,10 @@ export function QuoteModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-primary hover:bg-primary/90 text-white">
+        <Button 
+          size={size}
+          className={cn("bg-primary hover:bg-primary/90 text-white", className)}
+        >
           <Calculator className="mr-2 h-4 w-4" />
           {t("nav.getQuote")}
         </Button>

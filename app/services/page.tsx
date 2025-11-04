@@ -465,7 +465,10 @@ export default async function ServicesPage() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <QuoteModal />
+            <QuoteModal 
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg"
+            />
             <a href="tel:0816526141">
               <Button
                 size="lg"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/language-context';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -52,10 +52,11 @@ interface Category {
   slug: string;
 }
 
-export default function AdminProductFormPage({ params }: { params: { id: string } }) {
+export default function AdminProductFormPage({ params }: { params: Promise<{ id: string }> }) {
   const { language } = useLanguage();
   const router = useRouter();
-  const isEdit = params.id !== 'new';
+  const { id } = use(params);
+  const isEdit = id !== 'new';
   
   const [product, setProduct] = useState<Product>({
     id: 0,
@@ -111,7 +112,7 @@ export default function AdminProductFormPage({ params }: { params: { id: string 
       const fetchProduct = async () => {
         try {
           setLoading(true);
-          const response = await fetch(`/api/products/${params.id}`);
+          const response = await fetch(`/api/products/${id}`);
           if (response.ok) {
             const data = await response.json();
             // Parse image_urls from JSON string to array
@@ -132,7 +133,7 @@ export default function AdminProductFormPage({ params }: { params: { id: string 
 
       fetchProduct();
     }
-  }, [params.id, isEdit]);
+  }, [id, isEdit]);
 
   const handleInputChange = (field: keyof Product, value: any) => {
     setProduct(prev => ({
@@ -210,7 +211,7 @@ export default function AdminProductFormPage({ params }: { params: { id: string 
     setSaving(true);
 
     try {
-      const url = isEdit ? `/api/products/${params.id}` : '/api/products';
+      const url = isEdit ? `/api/products/${id}` : '/api/products';
       const method = isEdit ? 'PUT' : 'POST';
 
       const response = await fetch(url, {

@@ -426,7 +426,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <p className="text-lg opacity-80">Free consultation, site assessment, and customized quotation</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button size="lg" variant="secondary" className="shadow-lg hover:shadow-xl transition-all">
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg hover:shadow-xl transition-all"
+            >
               รับใบเสนอราคาฟรี
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

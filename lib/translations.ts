@@ -1,3 +1,5 @@
+export type Language = "th" | "en"
+
 export const translations = {
   th: {
     // Navigation

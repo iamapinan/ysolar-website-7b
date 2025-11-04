@@ -252,10 +252,10 @@ export default async function AboutPage() {
             พร้อมประหยัดค่าไฟและช่วยรักษาสิ่งแวดล้อมไปพร้อมกัน
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
+            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 border-2 border-white">
               ขอใบเสนอราคา
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-[#fe7c49] hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               ติดต่อทีมงาน
             </Button>
           </div>
