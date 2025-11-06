@@ -68,7 +68,7 @@ export default async function AboutPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Solar Rooftop */}
-            <Card className="border-green-200 hover:shadow-lg transition-shadow">
+            <Card className="border-green-200 hover:shadow-lg transition-shadow bg-white">
               <CardContent className="p-8 space-y-6">
                 <div className="flex items-center space-x-3">
                   <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center">
@@ -88,7 +88,7 @@ export default async function AboutPage() {
             </Card>
 
             {/* EV Charger */}
-            <Card className="border-blue-200 hover:shadow-lg transition-shadow">
+            <Card className="border-blue-200 hover:shadow-lg transition-shadow bg-white">
               <CardContent className="p-8 space-y-6">
                 <div className="flex items-center space-x-3">
                   <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -108,7 +108,7 @@ export default async function AboutPage() {
             </Card>
 
             {/* Maintenance */}
-            <Card className="border-orange-200 hover:shadow-lg transition-shadow">
+            <Card className="border-orange-200 hover:shadow-lg transition-shadow bg-white">
               <CardContent className="p-8 space-y-6">
                 <div className="flex items-center space-x-3">
                   <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center">
@@ -238,26 +238,6 @@ export default async function AboutPage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-secondary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <h2 className="text-3xl lg:text-4xl font-bold">เริ่มต้นกับ Y Solar วันนี้</h2>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            ร่วมเป็นส่วนหนึ่งของลูกค้าหลายร้อยรายที่เปลี่ยนมาใช้พลังงานสะอาด 
-            พร้อมประหยัดค่าไฟและช่วยรักษาสิ่งแวดล้อมไปพร้อมกัน
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 border-2 border-white">
-              ขอใบเสนอราคา
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              ติดต่อทีมงาน
-            </Button>
           </div>
         </div>
       </section>

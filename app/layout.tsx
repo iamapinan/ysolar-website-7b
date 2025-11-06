@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   title: "Y Solar - Clean Energy Solutions | โซลูชันพลังงานสะอาด",
   description:
     "Leading provider of solar rooftop systems and EV charging solutions in Thailand | ผู้นำด้านระบบโซลาร์รูฟท็อปและโซลูชันการชาร์จรถยนต์ไฟฟ้าในประเทศไทย",
-  generator: "v0.app",
   manifest: "/site.webmanifest",
   icons: {
     icon: [

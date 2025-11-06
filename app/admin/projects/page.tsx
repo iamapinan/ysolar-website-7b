@@ -20,6 +20,15 @@ async function ProjectsList({ page = 1, search = "" }: { page: number; search: s
   const { data: projects, total, page: currentPage, limit } = await getAllProjects(page, 10, search)
   const totalPages = Math.ceil(total / limit)
 
+  // สร้าง URL สำหรับ pagination
+  const buildUrl = (newPage: number) => {
+    const params = new URLSearchParams()
+    if (newPage > 1) params.set('page', newPage.toString())
+    if (search) params.set('search', search)
+    const query = params.toString()
+    return `/admin/projects${query ? `?${query}` : ''}`
+  }
+
   return (
     <div className="space-y-4">
       {/* Search */}
@@ -92,15 +101,23 @@ async function ProjectsList({ page = 1, search = "" }: { page: number; search: s
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center gap-2 mt-4">
-              <Button variant="outline" size="sm" disabled={currentPage === 1}>
-                ก่อนหน้า
-              </Button>
+              {currentPage > 1 ? (
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={buildUrl(currentPage - 1)}>ก่อนหน้า</Link>
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" disabled>ก่อนหน้า</Button>
+              )}
               <span className="px-4 py-2 text-sm">
                 หน้า {currentPage} จาก {totalPages}
               </span>
-              <Button variant="outline" size="sm" disabled={currentPage === totalPages}>
-                ถัดไป
-              </Button>
+              {currentPage < totalPages ? (
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={buildUrl(currentPage + 1)}>ถัดไป</Link>
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" disabled>ถัดไป</Button>
+              )}
             </div>
           )}
         </CardContent>

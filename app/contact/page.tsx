@@ -65,17 +65,9 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Information */}
           <div className="lg:col-span-1 space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Have questions about solar energy or EV charging? Our team of experts is here to help you find the
-                perfect clean energy solution.
-              </p>
-            </div>
-
             {/* Contact Details */}
             <div className="space-y-6">
-              <Card>
+              <Card className="py-2">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -83,13 +75,13 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground">Phone</h3>
-                      <p className="text-muted-foreground">+66-2-xxx-xxxx</p>
+                      <p className="text-muted-foreground">+66-81-6526141</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="py-2">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -97,13 +89,13 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground">Email</h3>
-                      <p className="text-muted-foreground">info@ysolar.co.th</p>
+                      <p className="text-muted-foreground">yod@ysolar.co.th</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="py-2">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -111,13 +103,13 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground">Office</h3>
-                      <p className="text-muted-foreground">Bangkok, Thailand</p>
+                      <p className="text-muted-foreground">282/4 หมู่ที่ 18 ตำบลพระลับ อำเภอเมืองขอนแก่น จังหวัดขอนแก่น</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="py-2">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -131,25 +123,18 @@ export default function ContactPage() {
                   </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <MessageCircle className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">LINE Official</h3>
-                      <p className="text-muted-foreground">@ysolar</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
+          <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Have questions about solar energy or EV charging? Our team of experts is here to help you find the
+                perfect clean energy solution.
+              </p>
+            </div>
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
@@ -209,11 +194,12 @@ export default function ContactPage() {
                     <Select
                       value={formData.serviceInterest}
                       onValueChange={(value) => handleInputChange("serviceInterest", value)}
+                      className="text-gray-900 bg-white"
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a service you're interested in" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="text-gray-900 bg-white">
                         <SelectItem value="solar">Solar Rooftop System</SelectItem>
                         <SelectItem value="ev_charger">EV Charger Installation</SelectItem>
                         <SelectItem value="maintenance">Maintenance Service</SelectItem>
@@ -238,7 +224,7 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-primary hover:bg-primary/90"
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white border-1 border-gray-800 hover:border-gray-600"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -265,40 +251,11 @@ export default function ContactPage() {
             <p className="text-muted-foreground">Come see our showroom and meet our team in person</p>
           </div>
 
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden py-0">
             <div className="w-full h-96 bg-muted flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <MapPin className="w-12 h-12 text-muted-foreground mx-auto" />
-                <p className="text-muted-foreground">Interactive map would be embedded here</p>
-                <p className="text-sm text-muted-foreground">Bangkok, Thailand</p>
-              </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4908.324736933801!2d102.88985600000001!3d16.424909000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDI1JzI5LjciTiAxMDLCsDUzJzIzLjUiRQ!5e1!3m2!1sen!2sth!4v1762405283713!5m2!1sen!2sth" width="600" height="520" style={{border:0}} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full"></iframe>
             </div>
           </Card>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <h2 className="text-3xl lg:text-4xl font-bold">Ready to Get Started?</h2>
-          <p className="text-xl opacity-90">
-            Schedule a free consultation with our experts and get a customized quote for your project.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg"
-            >
-              Schedule Consultation
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-            >
-              Get Free Quote
-            </Button>
-          </div>
         </div>
       </section>
     </div>

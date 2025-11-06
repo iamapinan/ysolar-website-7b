@@ -19,12 +19,11 @@ export function Navigation() {
     { href: "/services", label: t("nav.services") },
     { href: "/products", label: t("nav.products") },
     { href: "/projects", label: t("nav.projects") },
-    { href: "/news", label: t("nav.news") },
     { href: "/contact", label: t("nav.contact") },
   ]
 
   return (
-    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border">
+    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -40,7 +39,7 @@ export function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-gray-900 hover:text-foreground transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -70,7 +69,7 @@ export function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="block px-3 py-2 text-gray-900 hover:text-foreground transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}

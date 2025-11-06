@@ -76,7 +76,7 @@ export function Footer() {
             <div className="space-y-2 text-sm text-muted-foreground">
               <a href="tel:0816526141" className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span>081-6526141</span>
+                <span>+66-81-6526141</span>
               </a>
               <a href="mailto:yod@ysolar.co.th" className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />

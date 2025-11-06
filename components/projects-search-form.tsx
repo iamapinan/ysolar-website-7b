@@ -69,11 +69,11 @@ export default function ProjectsSearchForm({ uniqueLocations }: ProjectsSearchFo
         
         {/* Location Filter */}
         <Select value={location} onValueChange={setLocation} disabled={isPending}>
-          <SelectTrigger className="w-full sm:w-48">
+          <SelectTrigger className="w-full sm:w-48 bg-white">
             <Filter className="w-4 h-4 mr-2" />
             <SelectValue placeholder="เลือกพื้นที่" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white">
             <SelectItem value="all">ทุกพื้นที่</SelectItem>
             {uniqueLocations.map((loc) => (
               <SelectItem key={loc} value={loc}>
@@ -84,14 +84,14 @@ export default function ProjectsSearchForm({ uniqueLocations }: ProjectsSearchFo
         </Select>
 
         {/* Action Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-0">
           <Button 
             onClick={handleSearch}
             disabled={isPending}
             size="default"
-            className="whitespace-nowrap"
+            className="whitespace-nowrap border border-gray-400 hover:border-gray-300 bg-white mt-1"
           >
-            {isPending ? "กำลังค้นหา..." : "ค้นหา"}
+            {isPending ? "กำลังค้นหา..." : <><Search className="w-4 h-4" /> <span>ค้นหา</span></>}
           </Button>
           
           {(search || location !== "all") && (
@@ -100,6 +100,7 @@ export default function ProjectsSearchForm({ uniqueLocations }: ProjectsSearchFo
               disabled={isPending}
               variant="outline"
               size="default"
+              className="border border-gray-200 hover:border-gray-300 bg-white"
             >
               <X className="w-4 h-4" />
             </Button>

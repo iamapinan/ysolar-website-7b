@@ -4,10 +4,11 @@ export const runtime = 'nodejs'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idParam } = await params
+    const id = parseInt(idParam);
     const [rows] = await db.execute(
       'SELECT * FROM hero_banners WHERE id = ?',
       [id]
@@ -33,10 +34,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idParam } = await params
+    const id = parseInt(idParam);
     const body = await request.json();
     const {
       title,
@@ -73,10 +75,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idParam } = await params
+    const id = parseInt(idParam);
     
     await db.execute(
       'DELETE FROM hero_banners WHERE id = ?',

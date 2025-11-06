@@ -194,17 +194,6 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                         </p>
                       )}
 
-                      {project.roi_months && (
-                        <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl p-6 border border-primary/20">
-                          <div className="text-3xl font-bold text-primary mb-2">
-                            {project.roi_months} เดือน
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            ระยะเวลาคืนทุน / Payback Period
-                          </div>
-                        </div>
-                      )}
-
                       <Button 
                         asChild
                         size="lg" 
@@ -271,12 +260,6 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                     {project.capacity_kw && (
                       <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-full text-sm font-bold z-10">
                         {project.capacity_kw}kW
-                      </div>
-                    )}
-
-                    {project.roi_months && (
-                      <div className="absolute bottom-4 right-4 bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        คืนทุน {project.roi_months} เดือน
                       </div>
                     )}
                   </div>
@@ -351,41 +334,6 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               limit={projectsDb.limit}
             />
           )}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold">Ready to Start Your Project?</h2>
-            <h3 className="text-2xl lg:text-3xl font-bold opacity-90">พร้อมเริ่มโปรเจคของคุณแล้วหรือยัง?</h3>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xl opacity-90">Join our satisfied customers and start your clean energy journey today.</p>
-            <p className="text-lg opacity-80">เข้าร่วมกับลูกค้าที่พึงพอใจของเราและเริ่มต้นการเดินทางพลังงานสะอาดของคุณวันนี้</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg hover:shadow-xl transition-all"
-            >
-              รับใบเสนอราคาฟรี
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent shadow-lg hover:shadow-xl transition-all"
-            >
-              นัดหมายปรึกษา
-              <Calendar className="ml-2 w-5 h-5" />
-            </Button>
-          </div>
-          <div className="pt-8 text-sm opacity-70">
-            <p>ติดต่อเราได้ตลอด 24 ชั่วโมง | สำรวจหน้างานฟรี | รับประกันคุณภาพ</p>
-          </div>
         </div>
       </section>
     </div>

@@ -6,7 +6,8 @@ import { createProject } from "@/services/content.service"
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
-  const token = cookies().get(COOKIE_NAME)?.value
+  const cookieStore = await cookies()
+  const token = cookieStore.get(COOKIE_NAME)?.value
   const session = await getSession(token)
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   try {

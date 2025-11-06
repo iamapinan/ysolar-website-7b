@@ -88,13 +88,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       description: "ความสามารถในการผลิตไฟฟ้า"
     },
     {
-      icon: Clock,
-      title: "ระยะเวลาคืนทุน",
-      titleEn: "Payback Period",
-      value: project.roi_months ? `${project.roi_months} เดือน` : "N/A",
-      description: "เวลาที่ใช้ในการคืนทุนการลงทุน"
-    },
-    {
       icon: Leaf,
       title: "ลดการปล่อยคาร์บอน",
       titleEn: "Carbon Reduction",
@@ -224,7 +217,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <p className="text-xl text-muted-foreground">ข้อมูลและผลตอบแทนที่คาดหวังได้จากโปรเจคนี้</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <Card key={index} className="text-center p-6 hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/30">
                 <CardContent className="p-0 space-y-4">
@@ -258,7 +251,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <Card className="p-8 lg:p-12 bg-background/80 backdrop-blur-sm border-0 shadow-xl">
               <CardContent className="p-0 space-y-8">
                 <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
-                  {project.description.split('\n').map((paragraph, index) => (
+                  {project.description.split('\n').map((paragraph: string, index: number) => (
                     <p key={index} className="mb-4">
                       {paragraph}
                     </p>
@@ -287,26 +280,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                           <span className="font-medium">{project.capacity_kw} kW</span>
                         </div>
                       )}
-                      {project.created_at && (
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">วันที่เสร็จสิ้น:</span>
-                          <span className="font-medium">
-                            {new Date(project.created_at).toLocaleDateString('th-TH')}
-                          </span>
-                        </div>
-                      )}
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <h4 className="text-xl font-semibold text-foreground">ผลตอบแทน</h4>
                     <div className="space-y-3">
-                      {project.roi_months && (
-                        <div className="flex justify-between">
-                          <span className="text-muted-foreground">ระยะเวลาคืนทุน:</span>
-                          <span className="font-medium text-primary">{project.roi_months} เดือน</span>
-                        </div>
-                      )}
                       {project.capacity_kw && (
                         <>
                           <div className="flex justify-between">
@@ -343,14 +322,14 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredRelatedProjects.slice(0, 3).map((relatedProject) => (
                 <Link key={relatedProject.id} href={`/projects/${relatedProject.slug}`}>
-                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer">
+                  <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer py-0">
                     <div className="relative overflow-hidden">
                       <Image
                         src={relatedProject.featured_image || "/placeholder.svg"}
                         alt={relatedProject.title}
                         width={400}
-                        height={240}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                        height={280}
+                        className="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       
@@ -380,11 +359,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                             <span className="font-medium">{relatedProject.location}</span>
                           </div>
                         )}
-                        {relatedProject.created_at && (
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(relatedProject.created_at).toLocaleDateString('th-TH')}
-                          </span>
-                        )}
                       </div>
 
                       <Button
@@ -412,38 +386,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
       )}
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold">สนใจโปรเจคแบบนี้?</h2>
-            <h3 className="text-2xl lg:text-3xl font-bold opacity-90">Interested in Similar Project?</h3>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xl opacity-90">ปรึกษาฟรี ประเมินพื้นที่ และรับใบเสนอราคาที่เหมาะสมกับคุณ</p>
-            <p className="text-lg opacity-80">Free consultation, site assessment, and customized quotation</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg hover:shadow-xl transition-all"
-            >
-              รับใบเสนอราคาฟรี
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent shadow-lg hover:shadow-xl transition-all"
-            >
-              นัดหมายปรึกษา
-              <Calendar className="ml-2 w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

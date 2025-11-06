@@ -5,10 +5,11 @@ export const runtime = 'nodejs'
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const article = await getArticleBySlug(params.slug)
+    const { slug } = await params
+    const article = await getArticleBySlug(slug)
     
     if (!article) {
       return NextResponse.json(

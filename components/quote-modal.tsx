@@ -81,13 +81,13 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
       <DialogTrigger asChild>
         <Button 
           size={size}
-          className={cn("bg-primary hover:bg-primary/90 text-white", className)}
+          className={cn("bg-primary hover:bg-primary/90 text-gray-900", className)}
         >
           <Calculator className="mr-2 h-4 w-4" />
           {t("nav.getQuote")}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">{t("quote.title")}</DialogTitle>
         </DialogHeader>
@@ -137,10 +137,10 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
           <div>
             <Label htmlFor="serviceType">{t("quote.serviceType")} *</Label>
             <Select value={formData.serviceType} onValueChange={(value) => handleInputChange("serviceType", value)}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-white">
                 <SelectValue placeholder={t("quote.selectPlaceholder")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="solar-rooftop">{t("quote.services.solarRooftop")}</SelectItem>
                 <SelectItem value="ev-charger">{t("quote.services.evCharger")}</SelectItem>
                 <SelectItem value="maintenance">{t("quote.services.maintenance")}</SelectItem>
@@ -153,10 +153,10 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
             <div>
               <Label htmlFor="projectSize">{t("quote.projectSize")}</Label>
               <Select value={formData.projectSize} onValueChange={(value) => handleInputChange("projectSize", value)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white">
                   <SelectValue placeholder={t("quote.selectPlaceholder")} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="small">{t("quote.projectSizes.small")}</SelectItem>
                   <SelectItem value="medium">{t("quote.projectSizes.medium")}</SelectItem>
                   <SelectItem value="large">{t("quote.projectSizes.large")}</SelectItem>
@@ -166,10 +166,10 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
             <div>
               <Label htmlFor="budget">{t("quote.budget")}</Label>
               <Select value={formData.budget} onValueChange={(value) => handleInputChange("budget", value)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-white">
                   <SelectValue placeholder={t("quote.selectPlaceholder")} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="under-500k">{t("quote.budgets.under500k")}</SelectItem>
                   <SelectItem value="500k-1m">{t("quote.budgets.500k1m")}</SelectItem>
                   <SelectItem value="1m-5m">{t("quote.budgets.1m5m")}</SelectItem>
@@ -182,10 +182,10 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
           <div>
             <Label htmlFor="timeline">{t("quote.timeline")}</Label>
             <Select value={formData.timeline} onValueChange={(value) => handleInputChange("timeline", value)}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-white">
                 <SelectValue placeholder={t("quote.selectPlaceholder")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent  className="bg-white">
                 <SelectItem value="urgent">{t("quote.timelines.urgent")}</SelectItem>
                 <SelectItem value="normal">{t("quote.timelines.normal")}</SelectItem>
                 <SelectItem value="flexible">{t("quote.timelines.flexible")}</SelectItem>
@@ -204,7 +204,7 @@ export function QuoteModal({ className, size = "default" }: QuoteModalProps) {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="w-full border border-gray-200 hover:border-gray-300 bg-gray-900 text-white hover:bg-gray-800" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

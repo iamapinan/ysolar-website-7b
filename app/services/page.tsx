@@ -423,10 +423,6 @@ export default async function ServicesPage() {
                 },
               ].map((step, index) => (
                   <div key={index} className="relative">
-                    {/* Step Number */}
-                    <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary rounded-full flex items-center justify-center z-10">
-                      <span className="text-sm font-bold text-primary-foreground">{index + 1}</span>
-                    </div>
                     
                     <Card className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 relative z-0">
                       <CardContent className="p-6 space-y-4">
@@ -443,56 +439,6 @@ export default async function ServicesPage() {
                   </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KPGcgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIwLjEiPgo8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+CjwvZz4KPC9nPgo8L3N2Zz4=')]"></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 relative z-10">
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold">
-              พร้อมเริ่มต้นแล้วหรือยัง?
-            </h2>
-            <p className="text-xl opacity-90">
-              ติดต่อผู้เชี่ยวชาญของเราวันนี้เพื่อรับคำปรึกษาฟรีและใบเสนอราคาที่เหมาะสม
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <QuoteModal 
-              size="lg"
-              className="bg-white text-primary hover:bg-gray-100 border-2 border-white shadow-lg"
-            />
-            <a href="tel:0816526141">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-              >
-                โทร 081-6526141
-              </Button>
-            </a>
-          </div>
-          
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-primary-foreground/20">
-            {[
-              { value: "500+", label: "โครงการสำเร็จ" },
-              { value: "10+", label: "ปีประสบการณ์" },
-              { value: "25", label: "ปีรับประกัน" },
-              { value: "24/7", label: "บริการหลังการขาย" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl lg:text-3xl font-bold">{stat.value}</div>
-                <div className="text-sm opacity-75">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
